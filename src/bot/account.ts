@@ -2,9 +2,9 @@ import puppeteer from 'puppeteer';
 
 
 export class AccountService {
-  constructor(private name?: string, private email?: string , private birthDay?: string, private password?: string, private gender?: string){}
+  constructor(){}
 
-  async create(){
+  async create(name: string, email: string , birthDay: string, password: string, gender: 'male' | 'female' | 'custom'): Promise<void>{
     // launch browser
     const browser = await puppeteer.launch({
       headless: false,
@@ -63,9 +63,6 @@ export class AccountService {
       await passwordInput?.type('rejaul1200');
       //   await page.keyboard.press('Enter');
 
-
-
-
       // close browser window
     //   await browser.close();
     } catch (error) {
@@ -78,4 +75,7 @@ export class AccountService {
 
   }
 
+  async login(email: string, password: string): Promise<void> {
+
+  }
 }
