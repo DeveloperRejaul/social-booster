@@ -1,5 +1,5 @@
 {
-  "name": "nodejs-typescript",
+  "name": "fb-bot",
   "version": "1.0.0",
   "description": "this is template repo for nodejs typescript",
   "main": "dist/index.js",
@@ -13,6 +13,7 @@
   "dependencies": {
     "dotenv": "^16.4.4",
     "express": "^4.18.2",
+    "puppeteer": "^22.5.0",
     "rotating-file-stream": "^3.2.1",
     "ws": "^8.16.0"
   },
@@ -28,7 +29,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
-  "repository": "https://github.com/DeveloperRejaul/nodejs-typescript.git",
+  "repository": "https://github.com/DeveloperRejaul/fb-bot.git",
   "author": "Rezaul karim",
   "license": "ISC",
   "private": true

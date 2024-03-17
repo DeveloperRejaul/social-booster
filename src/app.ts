@@ -1,3 +1,9 @@
+import { AccountService } from './bot/account';
+const accountService = new AccountService();
+
 export default async function main (){
-  console.log('Hello world!');
+ 
+  // handle account
+  accountService.create();
+
 }
