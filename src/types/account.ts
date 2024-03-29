@@ -15,4 +15,13 @@ export interface IFBLogin {
 }
 
 
-export interface IGmailSignup{}
+export interface IGmailSignup{
+  firstName: string;
+  lastName: string;
+  month: number,
+  day: number;
+  year: number;
+  gender: number;
+  gmail: string;
+  password: string;
+}
