@@ -1,7 +1,7 @@
 import puppeteer from 'puppeteer';
 
-export class Gmail {
-  async createAccount () {
+export class Account {
+  async create () {
     const browser = await puppeteer.launch({
       headless: false,
       slowMo: 100,
@@ -57,10 +57,6 @@ export class Gmail {
     } catch (error) {
       console.log(error);
       await browser.close();
-        
     }
-
-
-    
   }
 }

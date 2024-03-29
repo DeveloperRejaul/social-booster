@@ -1,6 +1,6 @@
 type DateString = `${string}-${string}-${string}`;
 
-export interface ISignup {
+export interface IFBSignup {
   firstName: string,
   lastName: string,
   email: string ,
@@ -9,7 +9,10 @@ export interface ISignup {
   gender: 'male' | 'female' | 'custom'
 }
   
-export interface ILogin {
+export interface IFBLogin {
   email: string, 
   password: string
 }
+
+
+export interface IGmailSignup{}

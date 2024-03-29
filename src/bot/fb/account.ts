@@ -1,11 +1,11 @@
 import puppeteer from 'puppeteer';
-import { type ILogin,ISignup } from '../types/account';
+import { type IFBLogin,IFBSignup } from '../../types/account';
 // import { setTimeout } from 'timers/promises';
 
-export class AccountService {
+export class Account {
   constructor(){}
 
-  async signup(params: ISignup): Promise<void>{
+  async signup(params: IFBSignup): Promise<void>{
     // launch browser
     const browser = await puppeteer.launch({
       headless: false,
@@ -74,7 +74,6 @@ export class AccountService {
       await browser.close();
     } catch (error) {
       console.log(error);
-
       // close browser window
       await browser.close();
     }
@@ -82,7 +81,7 @@ export class AccountService {
 
   }
 
-  async login (params: ILogin) {
+  async login (params: IFBLogin) {
     
     const browser = await puppeteer.launch({
       headless: false,
