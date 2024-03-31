@@ -1,17 +1,17 @@
 import {Schema, model} from 'mongoose';
 
-interface IGmail {
+interface IUser {
   name: string
   password: string
   email: string
   rule: 'user' | 'admin' | 'moderator' | 'super-admin'
 }
 
-const gmailSchema = new Schema<IGmail>({
+const UserSchema = new Schema<IUser>({
   email:{type: String, required: true},
   password:{type: String, required: true},
   name:{type: String, required: true},
   rule: {type: String, required: true, enum :['user' , 'admin' , 'moderator' , 'super-admin']}
 },{timestamps:true});
 
-export const Gmail = model('user', gmailSchema);
+export const User = model('user', UserSchema);

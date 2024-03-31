@@ -1,20 +1,34 @@
 import { useForm } from "react-hook-form"
 import { showToast } from "../../utils/utils"
 import { useFetch } from "../../hooks/useFetch";
+import { useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { NAV_PATH } from "../../constants/navPath";
+import { useAppContext } from "../../hooks/useAppContext";
 
 
 
 
 export default function Login() {
     const { register, handleSubmit } = useForm();
-    const { handleFetch, data } = useFetch()
+    const { handleFetch, isSuccess, isError } = useFetch();
+    const navigate = useNavigate();
+    const { handleLogin } = useAppContext()
 
-    const onSubmit = (data) => {
-        handleFetch("/facebook/account")
-        showToast("You are successfully login", "success")
+    useEffect(() => {
+        if (isSuccess) {
+            showToast("You are successfully login", "success");
+            handleLogin(true)
+            navigate(NAV_PATH.home)
+        }
+        if (isError) {
+            showToast("Something went wrong ", "error");
+        }
+    }, [isSuccess, isError, navigate, handleLogin])
+
+    const onSubmit = (formData = {}) => {
+        handleFetch("/user/login", "POST", formData)
     }
-
-    console.log(data);
 
     return (
         <div className="h-screen flex flex-1 justify-center items-center">
