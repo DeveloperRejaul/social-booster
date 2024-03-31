@@ -17,5 +17,4 @@ const gmailSchema = new Schema<IGmail>({
   birthday:{type: String, required: true}
 },{timestamps:true});
 
-export const Gmail = model('gmail',gmailSchema);
-
+export const Gmail = model('gmail', gmailSchema);
