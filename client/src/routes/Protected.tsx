@@ -9,8 +9,7 @@ interface IProtected {
 }
 
 export default function Protected({ children }: IProtected) {
-    const { isLogin, isLoading } = useAppContext()
-    if (isLoading) return <div>Loading ...</div>
+    const { isLogin } = useAppContext()
     if (!isLogin) return <Navigate to={NAV_PATH.login} />
     return children;
 }
