@@ -1,4 +1,4 @@
-type DateString = `${string}-${string}-${string}`;
+export type DateString = `${string}-${string}-${string}`;
 
 export interface IFBSignup {
   firstName: string,

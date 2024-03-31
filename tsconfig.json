@@ -12,7 +12,11 @@
     "declarationMap": true,
     "outDir": "dist", 
     "rootDir": "src",
-    "experimentalDecorators": true
+    "experimentalDecorators": true,
+    "baseUrl": ".",
+    "paths": {
+      "@type*": ["src/types*"]
+    }
   },
   "include": [ "src/**/*"]
 }
