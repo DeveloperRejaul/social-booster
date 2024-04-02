@@ -35,7 +35,7 @@ export default function Login() {
             <form className="flex flex-col gap-y-2" onSubmit={handleSubmit(onSubmit)}>
                 <input {...register("email")} className="border outline-none border-warmGray300 px-3 py-2 rounded-md" placeholder="Enter your email" />
                 <input {...register("password")} className="border outline-none border-warmGray300 px-3 py-2 rounded-md" placeholder="Enter your password" />
-                <button type="submit" className="bg-blue500 rounded-md py-1">Login</button>
+                <button type="submit" className="bg-indigo400 rounded-md py-1">Login</button>
             </form>
         </div>
     )

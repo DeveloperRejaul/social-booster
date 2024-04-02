@@ -51,8 +51,8 @@ function Home() {
                         <p className="text-center" style={{ width: ColumnSize.BirthDay }}>{e.birthday}</p>
                         <p className="text-center" style={{ width: ColumnSize.Gender }}>{e.gender}</p>
                         <div className="flex justify-around items-center" style={{ width: ColumnSize.Actions }}>
-                            <button>Start</button>
-                            <button>Stop</button>
+                            <button className="bg-green700 px-2 py-1 rounded-md">Start</button>
+                            <button className="bg-warning700 px-2 py-1 rounded-md">Stop</button>
                         </div>
                     </div>
                 ))}

@@ -1,5 +1,5 @@
 {
-  "name": "fb-bot",
+  "name": "social-booster",
   "version": "1.0.0",
   "description": "this is template repo for nodejs typescript",
   "main": "dist/index.js",
@@ -20,8 +20,6 @@
     "jsonwebtoken": "^9.0.2",
     "mongoose": "^8.2.4",
     "puppeteer": "^22.5.0",
-    "puppeteer-extra": "^3.3.6",
-    "puppeteer-extra-plugin-stealth": "^2.11.2",
     "rotating-file-stream": "^3.2.1",
     "socket.io": "^4.7.5"
   },
@@ -42,7 +40,7 @@
     "ts-node": "^10.9.2",
     "typescript": "^5.3.3"
   },
-  "repository": "https://github.com/DeveloperRejaul/fb-bot.git",
+  "repository": "https://github.com/DeveloperRejaul/social-booster.git",
   "author": "Rezaul karim",
   "license": "ISC",
   "private": true

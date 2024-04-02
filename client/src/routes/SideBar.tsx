@@ -1,6 +1,7 @@
 import { NavLink, useNavigate } from 'react-router-dom';
 import { useAppContext } from '../hooks/useAppContext';
 import { useFetch } from '../hooks/useFetch';
+import Logo from '../assets/logo.png'
 
 export default function SideBar() {
 
@@ -15,10 +16,10 @@ export default function SideBar() {
     }
 
     return (
-        <div className="bg-pink100 h-[100vh] px-2 py-4 flex-col flex justify-between" style={{ width: 270 }}>
+        <div className="bg-pink100 h-[100vh] px-2 py-4 flex-col flex justify-between" style={{ width: 300 }}>
             <div>
                 <div className='h-20'>
-                    LOGO
+                    <img src={Logo} height={20} width={"90%"} alt="Logo" />
                 </div>
                 <div className='space-y-3'>
                     <NavLink
@@ -35,6 +36,13 @@ export default function SideBar() {
                         className={({ isActive }) => `flex px-2 py-3 rounded-lg font-bold text-lg text-warmGray800 ${isActive ? "bg-pink300" : "bg-pink100"}`}
                     >
                         Gmail
+                    </NavLink>
+                    <NavLink
+                        to={"/terminal"}
+                        end
+                        className={({ isActive }) => `flex px-2 py-3 rounded-lg font-bold text-lg text-warmGray800 ${isActive ? "bg-pink300" : "bg-pink100"}`}
+                    >
+                        Terminal
                     </NavLink>
                 </div>
             </div>

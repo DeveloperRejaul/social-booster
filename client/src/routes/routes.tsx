@@ -4,6 +4,7 @@ import Login from '../features/login/Login';
 import Protected from './Protected';
 import Home from '../features/home/Home';
 import Gmail from '../features/gmail/Gmail';
+import Terminal from '../features/terminal/Terminal';
 
 export const routes = createBrowserRouter([
     {
@@ -13,9 +14,14 @@ export const routes = createBrowserRouter([
             {
                 element: <Protected> <Home /> </Protected>,
                 path: "/",
-            }, {
+            },
+            {
                 element: <Protected> <Gmail /> </Protected>,
                 path: "/gmail",
+            },
+            {
+                element: <Protected> <Terminal /> </Protected>,
+                path: "/terminal",
             },
         ]
 

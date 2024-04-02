@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { NAV_PATH } from '../constants/navPath';
 import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../hooks/useAppContext';
+import Loading from '../assets/icon/Loading';
 const baseUrl = import.meta.env.VITE_BASE_URL
 
 interface IProtected {
@@ -22,7 +23,7 @@ export default function Protected({ children }: IProtected) {
         init()
     }, [handleLogin])
 
-    if (isLoading) return <div>Loading...</div>
+    if (isLoading) return <Loading />
     if (!isLogin) return <Navigate to={NAV_PATH.login} />
     return children;
 }
