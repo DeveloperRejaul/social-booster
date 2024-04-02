@@ -16,9 +16,13 @@ export default function Protected({ children }: IProtected) {
 
     useEffect(() => {
         const init = async () => {
-            const res = await fetch(`${baseUrl}/api/user/check`, { "credentials": "include" });
-            if (res.status === 200) { setLoading(false); handleLogin(true) }
-            if (res.status === 400 || res.status === 500) { setLoading(false); handleLogin(false) }
+            try {
+                const res = await fetch(`${baseUrl}/api/user/check`, { "credentials": "include" });
+                if (res.status === 200) { setLoading(false); handleLogin(true) }
+                if (res.status === 400 || res.status === 500) { setLoading(false); handleLogin(false) }
+            } catch (error) {
+                setLoading(false); handleLogin(false)
+            }
         };
         init()
     }, [handleLogin])
