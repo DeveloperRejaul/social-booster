@@ -6,6 +6,8 @@ export const Context = createContext({} as IContextValue);
 export const AppContext = ({ children }: IAppContext) => {
     const [isLogin, setLogin] = useState<boolean>(false);
 
+
+
     const handleLogin = (bol: boolean) => setLogin(bol);
 
 

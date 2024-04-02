@@ -1,12 +1,12 @@
 import { useState } from "react"
 const baseUrl = import.meta.env.VITE_BASE_URL
 
-export const useFetch = () => {
+export const useFetch = <T>() => {
   const [isSuccess, setIsSuccess] =  useState(false);
   const [isError, setIsError] =  useState(false);
   const [isLoading, setLoading] =  useState(true);
   const [error, setError] =  useState<unknown>("");
-  const [data, setData] =  useState(null);
+  const [data, setData] =  useState<T>(null as T);
 
 
   const handleFetch = async (url:string="", method:"GET"|"DELETE"|"PUT"|"POST" = "GET", data?:object) => {
@@ -57,6 +57,5 @@ export const useFetch = () => {
   }
 
 
-  return {isLoading, isSuccess, isError, error, data, setData, handleFetch} 
-
+  return {isLoading, isSuccess, isError, error, data, handleFetch} 
 }

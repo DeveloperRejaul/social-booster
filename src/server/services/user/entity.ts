@@ -58,23 +58,24 @@ export const getSingle = ({ws}: IEntity)=> async(req: Request, res: Response): P
   }
 };
 
-export const check = ({ws}: IEntity)=> async(req: Request, res: Response): Promise<unknown> => {
+export const check = ({ws}: IEntity)=> async(req: Request, res: Response) => {
   try {
     const token = req.cookies[process.env.JWT_SECRET!];
     
-    console.log('hello world');
     
     //@ts-ignore
     const user: IUser = jwt.decode(token);
     if (!user) return res.status(400).send('Authorization  failed');
 
+    
     // check user exists
     const userExists = await User.findOne({email:user.email});
+
     if (!userExists) return res.status(400).send('Authorization failed');
-    res.status(200).send('Authorization success');
+    return res.status(200).send(userExists);
   } catch (error) {
     console.log(error);
-    res.status(500).send('Something went wrong'); 
+    return res.status(500).send('Something went wrong'); 
   }
 };
 
@@ -96,6 +97,22 @@ export const login = ({ws}: IEntity)=> async(req: Request, res: Response): Promi
       return res.status(200).send({...account, token});
     }
     res.status(400).send('Email or password incorrect');
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('Something went wrong'); 
+  }
+};
+
+
+export const logout = ({ws}: IEntity)=> async(req: Request, res: Response): Promise<unknown> => {
+  try {
+    res.cookie(process.env.JWT_SECRET!, '',{
+      httpOnly: true,
+      sameSite: 'none',
+      secure: true,
+      expires: new Date(Date.now()) 
+    });
+    return res.status(200).send('Logout successful');
   } catch (error) {
     console.log(error);
     res.status(500).send('Something went wrong'); 
