@@ -18,10 +18,8 @@ export interface IFBLogin {
 export interface IGmailSignup{
   firstName: string;
   lastName: string;
-  month: number,
-  day: number;
-  year: number;
+  birthday: DateString,
   gender: number;
-  gmail: string;
+  email: string;
   password: string;
 }

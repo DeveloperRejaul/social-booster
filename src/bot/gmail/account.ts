@@ -1,23 +1,23 @@
+import puppeteer from 'puppeteer';
 import { IGmailSignup } from '../../types/account';
-import puppeteer from 'puppeteer-extra';
-import StealthPlugin from'puppeteer-extra-plugin-stealth';
-import { setTimeout } from 'timers/promises';
-const proxyUrl = 'http://scraperapi:e3ae0f61765502563a95687b59f9a7a4@proxy-server.scraperapi.com:8001';
 
 
-
-puppeteer.use(StealthPlugin());
 export class Account {
   async create (params: IGmailSignup) {
+    console.log(params);
+    
     const browser = await puppeteer.launch({
       headless: false,
       slowMo: 100,
       defaultViewport: null,
-      args: [ `--proxy-server=${proxyUrl}`] 
+      args: [''],
     });
-   
+
     try {
+      const birthDay = params.birthday.split('-');
       const page = await browser.newPage();
+      page.setUserAgent('Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36');
+
       await page.setUserAgent('Rezaul Karim');
 
       await page.goto('https://accounts.google.com/');
@@ -37,21 +37,21 @@ export class Account {
       await nextBtn?.click();
 
       await page.waitForSelector('#month');
-      await page.select('#month', params.month.toString());
+      await page.select('#month', birthDay[1]);
 
       await page.waitForSelector('#gender');
       await page.select('#gender', params.gender.toString());
 
       const day = await page.waitForSelector('#day');
-      await day?.type(params.day.toString());
+      await day?.type(birthDay[0]);
 
       const year = await page.waitForSelector('#year');
-      await year?.type(params.year.toString());
+      await year?.type(birthDay[2]);
       await page.keyboard.press('Enter');
 
       await page.waitForNavigation();
 
-      await page.keyboard.type(`---${params.gmail}`);
+      await page.keyboard.type(`---${params.email}`);
 
       await page.keyboard.press('Enter');
 

@@ -1,13 +1,15 @@
 import {type Request, Response } from 'express';
 import { IEntity } from '@type/express';
 import { Gmail } from './schema';
-
+import {Account} from '../../../bot/gmail/account';
+const GmailAccount = new Account();
 
 export const create = ({ws}: IEntity)=> async(req: Request, res: Response): Promise<void> => {
   try {
-    const accounts = new Gmail(req.body);
-    await accounts.save();
-    res.status(200).send(accounts);
+    await GmailAccount.create(req.body);
+    // const accounts = new Gmail(req.body);
+    // await accounts.save();
+    // res.status(200).send(accounts);
   } catch (error) {
     console.log(error);
     res.status(500).send('Something went wrong'); 
