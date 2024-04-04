@@ -33,7 +33,6 @@ export class Account {
       const page = await browser.newPage();
       await page.setUserAgent('Mozilla/5.0 (Linux; Android 10; K) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36');
 
-
       await page.goto('https://accounts.google.com/');
 
       const element = await page.waitForSelector('div ::-p-text(Create account)');
@@ -83,6 +82,8 @@ export class Account {
 
       await page.keyboard.press('Enter');
 
+
+      await this.input
     } catch (error) {
       console.log(error);
       await browser.close();
