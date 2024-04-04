@@ -16,7 +16,6 @@ export default function user (params: IEntity) {
   router.put('/user/:id', update(params));
   router.get('/user/:id', getSingle(params));
 
-  
   return router;
-}    
+}
 

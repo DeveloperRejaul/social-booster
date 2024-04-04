@@ -2,10 +2,10 @@ import {type Request, Response } from 'express';
 import { IEntity } from '@type/express';
 import { Gmail } from './schema';
 import {Account} from '../../../bot/gmail/account';
-const GmailAccount = new Account();
 
 export const create = ({ws}: IEntity)=> async(req: Request, res: Response): Promise<void> => {
   try {
+    const GmailAccount = new Account(ws);
     await GmailAccount.create(req.body);
     // const accounts = new Gmail(req.body);
     // await accounts.save();
