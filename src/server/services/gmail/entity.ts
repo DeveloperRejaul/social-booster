@@ -2,6 +2,13 @@ import { type Request, Response } from 'express';
 import { IEntity } from '@type/express';
 import { Gmail } from './schema';
 import { Account } from '../../../bot/gmail/account';
+const action = {
+  SUCCESS: 'success',
+  ERROR: 'error',
+  WARNING: 'warning',
+  INPUT: 'input',
+  RUNNING: 'running'
+};
 
 export const create = ({ ws }: IEntity) => async (req: Request, res: Response): Promise<void> => {
   try {
@@ -12,6 +19,7 @@ export const create = ({ ws }: IEntity) => async (req: Request, res: Response): 
     // res.status(200).send(accounts);
 
   } catch (error) {
+    ws.emit(action.ERROR, 'Error occurred smoothing wrong action');
     console.log(error);
     res.status(500).send('Something went wrong');
   }

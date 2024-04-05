@@ -1,5 +1,5 @@
 import { useLocation } from "react-router-dom"
-import Modal from "../components/modal/Modal";
+import Modal from "../components/modal/GmailModal";
 import { useState } from "react";
 
 interface IHeader {
@@ -17,9 +17,8 @@ export default function Header() {
     }
 
 
-    const handleTask = () => {
-        setShowModal(true)
-    }
+    const handleModal = (bool: boolean) => setShowModal(bool)
+    const handleTask = () => { setShowModal(true) }
 
 
     return (
@@ -32,7 +31,7 @@ export default function Header() {
             <Modal
                 showModal={showModal}
                 onClose={() => setShowModal(false)}
-                onSave={() => { }}
+                handleModal={handleModal}
             />
         </div>
     )
