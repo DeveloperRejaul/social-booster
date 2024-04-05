@@ -1,20 +1,22 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import puppeteer from 'puppeteer';
 import { IGmailSignup } from '../../types/account';
-import { Server } from 'socket.io';
-
+import { Socket } from 'socket.io';
+const fiveMinute = 60000 * 5;
 export class Account {
 
-  constructor(private ws: Server) { }
+  constructor(private ws: Socket) { }
 
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  async input(eventName: string, data: any) {
+  async wsInput(eventName: string, data: any) {
     return new Promise((resolve) => {
       this.ws.emit(eventName, data);
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      this.ws.on(eventName, (_data: any) => {
-        resolve(_data);
+      this.ws.on(eventName, (d) => {
+        resolve(d);
       });
+
+      setTimeout(() => {
+        resolve('Time over then 5 minutes ');
+      }, fiveMinute);
     });
   }
 
@@ -23,7 +25,7 @@ export class Account {
     const browser = await puppeteer.launch({
       headless: false,
       slowMo: 100,
-      defaultViewport: null,
+      defaultViewport: { width: 500, height: 300 },
       args: [''],
     });
 
@@ -83,7 +85,9 @@ export class Account {
       await page.keyboard.press('Enter');
 
 
-      await this.input
+      const result = await this.wsInput('verification', 'gave me verification code with in 5 minutes ');
+      console.log(result);
+
     } catch (error) {
       console.log(error);
       await browser.close();

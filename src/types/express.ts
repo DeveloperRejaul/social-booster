@@ -1,8 +1,8 @@
 import { Request } from 'express';
-import { Server } from 'socket.io';
+import { Socket } from 'socket.io';
 
 export interface IEntity {
-  ws: Server
+  ws: Socket
 }
 
 export interface IFile {

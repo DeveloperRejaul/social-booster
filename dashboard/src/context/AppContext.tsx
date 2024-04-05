@@ -11,8 +11,12 @@ export const AppContext = ({ children }: IAppContext) => {
 
 
     useEffect(() => {
-        socket.on("bot", (data) => {
+        socket.on("verification", (data) => {
             console.log(data);
+
+            setTimeout(() => {
+                socket.emit('verification', "123456789");
+            }, 60000);
         })
     }, [])
 

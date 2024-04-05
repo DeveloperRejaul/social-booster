@@ -1,11 +1,11 @@
 import { Server } from 'socket.io';
 import * as http from 'http';
 
-export const socket = (server: http.Server): Server => {
+export const socketAuth = (server: http.Server): Server => {
 
   const origin = process.env.ORIGIN_URL;
 
-  const io = new Server(server, { cors:{origin: origin?.split(',')}, pingInterval: 6000 });
+  const io = new Server(server, { cors: { origin: origin?.split(',') }, pingInterval: 6000 });
 
   io.use(async (socket, next) => {
     // const token = socket.handshake?.headers?.token?.split(' ')[1];
@@ -19,3 +19,4 @@ export const socket = (server: http.Server): Server => {
 
   return io;
 };
+
