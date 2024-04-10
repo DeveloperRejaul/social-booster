@@ -1,9 +1,14 @@
 import { useLocation } from "react-router-dom"
-import Modal from "../components/modal/GmailModal";
-import { useState } from "react";
+import GmailModal from "../components/modal/GmailModal";
+import React, { useState } from "react";
+import FacebookModal from "../components/modal/FacebookModal";
 
 interface IHeader {
     [key: string]: string
+}
+
+interface IModals {
+    [key: string]: React.ReactNode
 }
 
 
@@ -17,8 +22,22 @@ export default function Header() {
     }
 
 
-    const handleModal = (bool: boolean) => setShowModal(bool)
-    const handleTask = () => { setShowModal(true) }
+    const handleModal = (bool: boolean) => setShowModal(bool);
+    const handleTask = () => setShowModal(true)
+
+
+    const modals: IModals = {
+        "/": <FacebookModal
+            showModal={showModal}
+            onClose={() => setShowModal(false)}
+            handleModal={handleModal}
+        />,
+        "/gmail": <GmailModal
+            showModal={showModal}
+            onClose={() => setShowModal(false)}
+            handleModal={handleModal}
+        />
+    }
 
 
     return (
@@ -28,11 +47,7 @@ export default function Header() {
                 {["/terminal"].includes(pathname) || <p onClick={handleTask} className="bg-indigo400 px-7 py-1 rounded-md cursor-pointer font-bold hover:bg-indigo500">Task</p>}
                 <div className="h-10 w-10 rounded-full bg-warmGray400" />
             </div>
-            <Modal
-                showModal={showModal}
-                onClose={() => setShowModal(false)}
-                handleModal={handleModal}
-            />
+            {modals[pathname]}
         </div>
     )
 }

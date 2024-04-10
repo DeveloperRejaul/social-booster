@@ -3,7 +3,6 @@ import { breakPoints ,colors, spacing} from './src/config/tailwind';
 const {BASE,LG,MD,SM,XL,XL_2} = breakPoints;
 
 
-
 export default {
   content: [
     "./index.html",
