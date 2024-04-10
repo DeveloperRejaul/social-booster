@@ -1,4 +1,4 @@
-import { useForm, useWatch } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { useFetch } from "../../hooks/useFetch";
 
 interface IModal {
