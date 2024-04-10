@@ -1,5 +1,6 @@
 import { useForm } from "react-hook-form";
 import { useFetch } from "../../hooks/useFetch";
+import Button from "../button/Button";
 
 interface IModal {
     showModal: boolean;
@@ -18,7 +19,7 @@ interface IFromData {
 export default function Modal({ showModal, onClose, handleModal }: IModal) {
 
     const { handleSubmit, register } = useForm()
-    const { handleFetch } = useFetch()
+    const { handleFetch, isLoading } = useFetch()
 
     const onSubmit = (data: any) => {
         const birthday = data.birthday.split("-")
@@ -53,25 +54,25 @@ export default function Modal({ showModal, onClose, handleModal }: IModal) {
                                 </div>
                                 {/*body*/}
                                 <div className="flex flex-col p-3 space-y-3 px-8" >
-                                    <input {...register("firstName")} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="first name" />
-                                    <input {...register("lastName")} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="last name" />
-                                    <input {...register("email")} type="email" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Enter Email" />
-                                    <input {...register("password")} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Enter password" />
-                                    <input {...register("birthday")} type="date" name="birthday" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Select birthday" />
+                                    <input {...register("firstName", { required: true })} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="first name" />
+                                    <input {...register("lastName", { required: true })} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="last name" />
+                                    <input {...register("email", { required: true })} type="email" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Enter Email" />
+                                    <input {...register("password", { required: true })} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Enter password" />
+                                    <input {...register("birthday", { required: true })} type="date" name="birthday" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Select birthday" />
                                     <div className="flex space-x-5">
                                         <div className="flex justify-center items-center space-x-2">
                                             <label className="text-warmGray700 font-normal text-lg cursor-pointer" htmlFor="male">Male</label>
-                                            <input {...register("gender")} type="radio" value={"1"} id="male" className="scale-110 cursor-pointer" />
+                                            <input {...register("gender", { required: true })} type="radio" value={"1"} id="male" className="scale-110 cursor-pointer" />
                                         </div>
 
                                         <div className="flex justify-center items-center space-x-2">
                                             <label className="text-warmGray700 font-normal text-lg cursor-pointer" htmlFor="female">Female</label>
-                                            <input  {...register("gender")} type="radio" value={"2"} id="female" className="scale-110 cursor-pointer" />
+                                            <input  {...register("gender", { required: true })} type="radio" value={"2"} id="female" className="scale-110 cursor-pointer" />
                                         </div>
 
                                         <div className="flex justify-center items-center space-x-2">
                                             <label className="text-warmGray700 font-normal text-lg cursor-pointer" htmlFor="custom">Custom</label>
-                                            <input  {...register("gender")} type="radio" value={"3"} id="custom" className="scale-110 cursor-pointer" />
+                                            <input  {...register("gender", { required: true })} type="radio" value={"3"} id="custom" className="scale-110 cursor-pointer" />
                                         </div>
                                     </div>
                                 </div>
@@ -84,12 +85,7 @@ export default function Modal({ showModal, onClose, handleModal }: IModal) {
                                     >
                                         Close
                                     </button>
-                                    <button
-                                        className="bg-indigo400  px-5 py-2 rounded-md border border-white hover:bg-white  hover:border-indigo400"
-                                        type="submit"
-                                    >
-                                        Save
-                                    </button>
+                                    <Button className="px-3 py-2 !h-10" isLoading={isLoading} text="Save" />
                                 </div>
                             </form>
                         </div>

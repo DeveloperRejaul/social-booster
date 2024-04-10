@@ -34,7 +34,7 @@ export class Account {
       headless: false,
       slowMo: 100,
       defaultViewport: null,
-      args: [''],
+      channel: 'chrome'
     });
 
     try {
@@ -114,8 +114,15 @@ export class Account {
       await page.keyboard.press('Enter');
       this.ws.emit(action.SUCCESS, 'Submitting  information ');
 
+      await page.waitForNavigation();
+      await page.keyboard?.type('01857735471');
+      await page.keyboard.press('Enter');
+
+
       const result = await this.wsInput('verification', 'gave me verification code with in 5 minutes ');
       console.log(result);
+
+      return params;
 
     } catch (error) {
       console.log(error);

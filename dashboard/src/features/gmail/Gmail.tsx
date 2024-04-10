@@ -8,6 +8,7 @@ interface IGmail {
     email: string,
     birthday: DateString,
     password: string,
+    gender: string,
 }
 
 enum ColumnSize {
@@ -15,7 +16,12 @@ enum ColumnSize {
     LastName = 101,
     Email = 200,
     BirthDay = 103,
-    Password = 104
+    Password = 104,
+    gender = 105,
+}
+
+interface IGender {
+    [key: string]: string
 }
 
 function Gmail() {
@@ -23,6 +29,12 @@ function Gmail() {
     useEffect(() => {
         handleFetch("/gmail")
     }, [])
+
+    const gender: IGender = {
+        "1": "Male",
+        "2": "Female",
+        "3": "Custom",
+    }
 
     return (
         <div className="flex flex-1 flex-col items-center">
@@ -34,6 +46,7 @@ function Gmail() {
                     <p className="text-center font-bold" style={{ width: ColumnSize.FirstName }}>First Name</p>
                     <p className="text-center font-bold" style={{ width: ColumnSize.LastName }}>Last Name</p>
                     <p className="text-center font-bold" style={{ width: ColumnSize.BirthDay }}>Birth Day</p>
+                    <p className="text-center font-bold" style={{ width: ColumnSize.gender }}>Gender</p>
                 </div>
             </div>
             <div>
@@ -44,6 +57,7 @@ function Gmail() {
                         <p className="text-center" style={{ width: ColumnSize.FirstName }}>{e.firstName}</p>
                         <p className="text-center" style={{ width: ColumnSize.LastName }}>{e.lastName}</p>
                         <p className="text-center" style={{ width: ColumnSize.BirthDay }}>{e.birthday}</p>
+                        <p className="text-center" style={{ width: ColumnSize.gender }}>{gender[e.gender]}</p>
                     </div>
                 ))}
             </div>

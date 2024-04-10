@@ -23,9 +23,21 @@ enum ColumnSize {
 
 function Home() {
     const { handleFetch, data } = useFetch<IFBSignUp[]>()
+
     useEffect(() => {
         handleFetch("/facebook/account")
     }, [])
+
+
+    const handleStart = (data: any) => {
+        console.log(data);
+
+    }
+
+    const handleStop = (data: any) => {
+        console.log(data);
+
+    }
 
     return (
         <div className="flex flex-1 flex-col items-center">
@@ -51,8 +63,8 @@ function Home() {
                         <p className="text-center" style={{ width: ColumnSize.BirthDay }}>{e.birthday}</p>
                         <p className="text-center" style={{ width: ColumnSize.Gender }}>{e.gender}</p>
                         <div className="flex justify-around items-center" style={{ width: ColumnSize.Actions }}>
-                            <button className="bg-green700 px-2 py-1 rounded-md">Start</button>
-                            <button className="bg-warning700 px-2 py-1 rounded-md">Stop</button>
+                            <button className="bg-green700 px-2 py-1 rounded-md" onClick={() => handleStart(e)}>Start</button>
+                            <button className="bg-warning700 px-2 py-1 rounded-md" onClick={() => handleStop(e)}>Stop</button>
                         </div>
                     </div>
                 ))}

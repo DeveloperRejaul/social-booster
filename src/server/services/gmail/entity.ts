@@ -12,12 +12,13 @@ const action = {
 
 export const create = ({ ws }: IEntity) => async (req: Request, res: Response): Promise<void> => {
   try {
-    const GmailAccount = new Account(ws);
-    await GmailAccount.create(req.body);
-    // const accounts = new Gmail(req.body);
-    // await accounts.save();
-    // res.status(200).send(accounts);
+    // const GmailAccount = new Account(ws);
+    // const userData = await GmailAccount.create(req.body);
+    // console.log(userData);
 
+    const accounts = new Gmail(req.body);
+    await accounts.save();
+    res.status(200).send(accounts);
   } catch (error) {
     ws.emit(action.ERROR, 'Error occurred smoothing wrong action');
     console.log(error);

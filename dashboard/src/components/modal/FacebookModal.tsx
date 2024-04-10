@@ -1,11 +1,13 @@
 import { useForm } from "react-hook-form";
 import { useFetch } from "../../hooks/useFetch";
+import Button from "../button/Button";
 
 interface IModal {
     showModal: boolean;
     onClose: () => void;
     handleModal: (bool: boolean) => void
 }
+
 interface IFromData {
     firstName: string;
     lastName: string;
@@ -14,24 +16,32 @@ interface IFromData {
     gender: string;
     password: string;
 }
-
+interface IGender {
+    [key: string]: string
+}
 export default function Modal({ showModal, onClose, handleModal }: IModal) {
 
     const { handleSubmit, register, watch } = useForm()
-    const { handleFetch } = useFetch()
-    const taskType = watch("task-type");
+    const { handleFetch, isLoading } = useFetch()
+    const taskType = watch("task-type") || 'add';
 
+    const gender: IGender = {
+        "1": "male",
+        "2": "female",
+        "3": "custom",
+    }
 
     const onSubmit = (data: any) => {
+
         const birthday = data.birthday.split("-");
         const formattedBirthday = `${birthday[2]}-${birthday[1]}-${birthday[0]}`
 
-        handleFetch<IFromData>("/gmail", "POST", {
+        handleFetch<IFromData>("/facebook/account", "POST", {
             birthday: formattedBirthday,
             email: data.email,
             firstName: data.firstName,
             lastName: data.lastName,
-            gender: data.gender,
+            gender: gender[data.gender],
             password: data.password
         });
         handleModal(false);
@@ -53,7 +63,7 @@ export default function Modal({ showModal, onClose, handleModal }: IModal) {
                                         Facebook
                                     </h3>
 
-                                    <select {...register("task-type")}>
+                                    <select {...register("task-type")} defaultValue={"add"}>
                                         <option value="add"> Add account</option>
                                         <option value="like"> Like</option>
                                         <option value="follow"> Follow </option>
@@ -62,11 +72,42 @@ export default function Modal({ showModal, onClose, handleModal }: IModal) {
                                     </select>
                                 </div>
                                 {/*body*/}
-                                {taskType === "add" && <div>Add account</div>}
-                                {taskType === "like" && <div>Like</div>}
-                                {taskType === "follow" && <div>follow</div>}
-                                {taskType === "watch" && <div>watch</div>}
-                                {taskType === "comments" && <div>Comments</div>}
+                                {taskType === "add" && <div className="flex flex-col p-3 space-y-3 px-8" >
+                                    <input {...register("firstName")} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="First name" />
+                                    <input {...register("lastName")} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Last name" />
+                                    <input {...register("email")} type="email" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Enter Email" />
+                                    <input {...register("password")} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Enter password" />
+                                    <input {...register("birthday")} type="date" name="birthday" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Select birthday" />
+                                    <div className="flex space-x-5">
+                                        <div className="flex justify-center items-center space-x-2">
+                                            <label className="text-warmGray700 font-normal text-lg cursor-pointer" htmlFor="male">Male</label>
+                                            <input {...register("gender")} type="radio" value={"1"} id="male" className="scale-110 cursor-pointer" />
+                                        </div>
+
+                                        <div className="flex justify-center items-center space-x-2">
+                                            <label className="text-warmGray700 font-normal text-lg cursor-pointer" htmlFor="female">Female</label>
+                                            <input  {...register("gender")} type="radio" value={"2"} id="female" className="scale-110 cursor-pointer" />
+                                        </div>
+
+                                        <div className="flex justify-center items-center space-x-2">
+                                            <label className="text-warmGray700 font-normal text-lg cursor-pointer" htmlFor="custom">Custom</label>
+                                            <input  {...register("gender")} type="radio" value={"3"} id="custom" className="scale-110 cursor-pointer" />
+                                        </div>
+                                    </div>
+                                </div>}
+
+                                {taskType === "like" && <div className="flex flex-col p-3 space-y-3 px-8" >
+                                    <input {...register("like")} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Past link" />
+                                </div>}
+                                {taskType === "follow" && <div className="flex flex-col p-3 space-y-3 px-8" >
+                                    <input {...register("follow")} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Past link" />
+                                </div>}
+                                {taskType === "watch" && <div className="flex flex-col p-3 space-y-3 px-8" >
+                                    <input {...register("watch")} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Past link" />
+                                </div>}
+                                {taskType === "comments" && <div className="flex flex-col p-3 space-y-3 px-8" >
+                                    <input {...register("comments")} type="text" className="border border-warmGray300 px-2 rounded-md py-2 " placeholder="Past link" />
+                                </div>}
 
                                 {/*footer*/}
                                 <div className="flex items-center justify-end p-6 border-t border-solid border-blueGray-200 rounded-b space-x-3">
@@ -77,12 +118,7 @@ export default function Modal({ showModal, onClose, handleModal }: IModal) {
                                     >
                                         Close
                                     </button>
-                                    <button
-                                        className="bg-indigo400  px-5 py-2 rounded-md border border-white hover:bg-white  hover:border-indigo400"
-                                        type="submit"
-                                    >
-                                        Save
-                                    </button>
+                                    <Button className="px-3 py-2 !h-10" isLoading={isLoading} text="Save" />
                                 </div>
                             </form>
                         </div>
