@@ -4,7 +4,7 @@ interface IRootLayoutProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({children}:IRootLayoutProps) {
+export default function HomeLayout({ children }: IRootLayoutProps) {
   return (
     <html lang="en">
       <body>{children}</body>

@@ -5,13 +5,14 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { NAV_PATH } from "../../constants/navPath";
 import { useAppContext } from "../../hooks/useAppContext";
+import Button from "../../components/button/Button";
 
 
 
 
 export default function Login() {
     const { register, handleSubmit } = useForm();
-    const { handleFetch, isSuccess, isError } = useFetch();
+    const { handleFetch, isSuccess, isError, isLoading } = useFetch();
     const navigate = useNavigate();
     const { handleLogin } = useAppContext()
 
@@ -35,7 +36,7 @@ export default function Login() {
             <form className="flex flex-col gap-y-2" onSubmit={handleSubmit(onSubmit)}>
                 <input {...register("email")} className="border outline-none border-warmGray300 px-3 py-2 rounded-md" placeholder="Enter your email" />
                 <input {...register("password")} className="border outline-none border-warmGray300 px-3 py-2 rounded-md" placeholder="Enter your password" />
-                <button type="submit" className="bg-indigo400 rounded-md py-1">Login</button>
+                <Button text="Login" isLoading={isLoading} />
             </form>
         </div>
     )

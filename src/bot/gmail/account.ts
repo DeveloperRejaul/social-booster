@@ -31,7 +31,7 @@ export class Account {
   async create(params: IGmailSignup) {
 
     const browser = await puppeteer.launch({
-      headless: true,
+      headless: false,
       slowMo: 100,
       defaultViewport: null,
       args: [''],

@@ -4,7 +4,7 @@ const baseUrl = import.meta.env.VITE_BASE_URL
 export const useFetch = <T>() => {
   const [isSuccess, setIsSuccess] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [isLoading, setLoading] = useState(true);
+  const [isLoading, setLoading] = useState(false);
   const [error, setError] = useState<unknown>("");
   const [data, setData] = useState<T>(null as T);
 
