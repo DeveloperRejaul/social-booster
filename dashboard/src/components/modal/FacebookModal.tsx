@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useFetch } from "../../hooks/useFetch";
 import Button from "../button/Button";
+import { useNavigate } from "react-router-dom";
+import { NAV_PATH } from "../../constants/navPath";
 
 interface IModal {
     showModal: boolean;
@@ -23,6 +25,7 @@ export default function Modal({ showModal, onClose, handleModal }: IModal) {
 
     const { handleSubmit, register, watch } = useForm()
     const { handleFetch, isLoading } = useFetch()
+    const navigate = useNavigate()
     const taskType = watch("task-type") || 'add';
 
     const gender: IGender = {
@@ -45,6 +48,7 @@ export default function Modal({ showModal, onClose, handleModal }: IModal) {
             password: data.password
         });
         handleModal(false);
+        navigate(NAV_PATH.terminal)
     }
 
     return (

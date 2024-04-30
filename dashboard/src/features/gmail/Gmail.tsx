@@ -1,5 +1,6 @@
 import { useEffect } from "react"
 import { useFetch } from "../../hooks/useFetch"
+import { cn } from "../../utils/utils";
 
 type DateString = `${string}-${string}-${string}`;
 interface IGmail {
@@ -9,6 +10,7 @@ interface IGmail {
     birthday: DateString,
     password: string,
     gender: string,
+    facebook: string
 }
 
 enum ColumnSize {
@@ -47,6 +49,7 @@ function Gmail() {
                     <p className="text-center font-bold" style={{ width: ColumnSize.LastName }}>Last Name</p>
                     <p className="text-center font-bold" style={{ width: ColumnSize.BirthDay }}>Birth Day</p>
                     <p className="text-center font-bold" style={{ width: ColumnSize.gender }}>Gender</p>
+                    <p className="text-center font-bold" style={{ width: ColumnSize.gender }}>FB Status</p>
                 </div>
             </div>
             <div>
@@ -58,6 +61,7 @@ function Gmail() {
                         <p className="text-center" style={{ width: ColumnSize.LastName }}>{e.lastName}</p>
                         <p className="text-center" style={{ width: ColumnSize.BirthDay }}>{e.birthday}</p>
                         <p className="text-center" style={{ width: ColumnSize.gender }}>{gender[e.gender]}</p>
+                        <p className={cn(`text-center rounded-md text-white ${e?.facebook && "bg-blue500"} ${e?.facebook || "bg-error500"}`)} style={{ width: ColumnSize.gender }}>{e?.facebook ? "Active" : "Inactive"}</p>
                     </div>
                 ))}
             </div>

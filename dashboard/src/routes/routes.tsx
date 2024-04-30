@@ -2,7 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import Main from './main';
 import Login from '../features/login/Login';
 import Protected from './Protected';
-import Home from '../features/home/Home';
+import Facebook from '../features/fb/fb';
 import Gmail from '../features/gmail/Gmail';
 import Terminal from '../features/terminal/Terminal';
 
@@ -12,7 +12,7 @@ export const routes = createBrowserRouter([
         element: <Protected> <Main /> </Protected>,
         children: [
             {
-                element: <Protected> <Home /> </Protected>,
+                element: <Protected> <Facebook /> </Protected>,
                 path: "/",
             },
             {

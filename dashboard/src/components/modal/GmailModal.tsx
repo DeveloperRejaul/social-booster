@@ -1,6 +1,8 @@
 import { useForm } from "react-hook-form";
 import { useFetch } from "../../hooks/useFetch";
 import Button from "../button/Button";
+import { useNavigate } from "react-router-dom";
+import { NAV_PATH } from "../../constants/navPath";
 
 interface IModal {
     showModal: boolean;
@@ -20,6 +22,7 @@ export default function Modal({ showModal, onClose, handleModal }: IModal) {
 
     const { handleSubmit, register } = useForm()
     const { handleFetch, isLoading } = useFetch()
+    const navigate = useNavigate()
 
     const onSubmit = (data: any) => {
         const birthday = data.birthday.split("-")
@@ -33,7 +36,8 @@ export default function Modal({ showModal, onClose, handleModal }: IModal) {
             gender: data.gender,
             password: data.password
         });
-        handleModal(false)
+        handleModal(false);
+        navigate(NAV_PATH.terminal)
     }
 
     return (

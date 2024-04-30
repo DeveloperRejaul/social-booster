@@ -1,4 +1,5 @@
 export const NAV_PATH = {
-    home:"/",
-    login:"/login",
+    home: "/",
+    login: "/login",
+    terminal: "/terminal",
 }
