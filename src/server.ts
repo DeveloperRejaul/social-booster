@@ -49,7 +49,7 @@ export default async function server() {
 
 
   // handle static file build file handle and crate client folder
-  const clientPath = path.join(path.resolve(), 'src/server/client');
+  const clientPath = path.join(path.resolve(), 'src/client');
   if (!fs.existsSync(clientPath)) fs.mkdirSync(clientPath);
   app.use(express.static(clientPath));
 

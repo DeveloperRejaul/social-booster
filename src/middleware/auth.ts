@@ -1,5 +1,5 @@
 import { NextFunction, Response } from 'express';
-import { User } from '../services/user/schema';
+import { User } from '../server/services/user/schema';
 import jwt from 'jsonwebtoken';
 import { IRequest, IUser } from '@type/express';
 
@@ -14,7 +14,7 @@ export const auth = async (res: Response, req: IRequest, next: NextFunction) => 
     if (!user) return res.status(400).send('Authorization failed');
 
     // check user exists
-    const userExists = await User.findOne({email:user.email});
+    const userExists = await User.findOne({ email: user.email });
     if (!userExists) return res.status(400).send('Authorization failed');
     req.email = userExists.email;
     req.id = userExists.id;

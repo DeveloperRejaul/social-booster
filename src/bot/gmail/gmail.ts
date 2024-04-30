@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import puppeteer from 'puppeteer';
-import { type IGmailSignup } from '../../types/account';
+import { type IGmailSignup } from '../../types/bot';
 import { Socket } from 'socket.io';
 
 const action = {
@@ -11,7 +11,7 @@ const action = {
   RUNNING: 'running'
 };
 const fiveMinute = 60000 * 5;
-export class Account {
+export class Gmail {
 
   constructor(private ws: Socket) { }
 

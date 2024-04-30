@@ -1,8 +1,8 @@
-import server from './server/server';
+import server from './server';
 
-export default async function main (){
+export default async function main() {
   await server();
- 
+
   // handle account
   // await accountService.signup({
   //   firstName:'kamal',
@@ -15,7 +15,7 @@ export default async function main (){
 
   // await fbAccount.login({email:'kamalmia1060@gmail.com', password:'kamal1060' });
   // await Test();
-  
+
   // await gmailAccount.create({
   //   firstName:'jamal_kamal_hira',
   //   lastName:'khan',
@@ -29,4 +29,4 @@ export default async function main (){
 
 }
 
-(async()=>{ await main (); })();
+(async () => { await main(); })();

@@ -1,18 +1,23 @@
 import { type Request, Response } from 'express';
 import { IEntity } from '@type/express';
-import { FBAccounts } from './schema';
-import { Account } from '../../../bot/gmail/account';
+import { Gmail } from './schema';
+import { Gmail as GmailBot } from '../../bot/gmail/gmail';
 
+const action = {
+  SUCCESS: 'success',
+  ERROR: 'error',
+  WARNING: 'warning',
+  INPUT: 'input',
+  RUNNING: 'running'
+};
 
 export const create = ({ ws }: IEntity) => async (req: Request, res: Response): Promise<void> => {
   try {
-    const gmail = new Account(ws);
-    await gmail.create(req.body);
-
-    // const accounts = new FBAccounts(req.body);
-    // await accounts.save();
-    // res.status(200).send(accounts);
+    const accounts = new Gmail(req.body);
+    await accounts.save();
+    res.status(200).send(accounts);
   } catch (error) {
+    ws.emit(action.ERROR, 'Error occurred smoothing wrong action');
     console.log(error);
     res.status(500).send('Something went wrong');
   }
@@ -21,7 +26,7 @@ export const create = ({ ws }: IEntity) => async (req: Request, res: Response): 
 export const Delete = ({ ws }: IEntity) => async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.id;
-    const account = await FBAccounts.findByIdAndDelete({ _id: id });
+    const account = await Gmail.findByIdAndDelete({ _id: id });
     res.status(200).send(account);
   } catch (error) {
     console.log(error);
@@ -32,7 +37,7 @@ export const Delete = ({ ws }: IEntity) => async (req: Request, res: Response): 
 export const update = ({ ws }: IEntity) => async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.id;
-    const account = await FBAccounts.findByIdAndUpdate({ _id: id }, { $set: req.body }, { new: true });
+    const account = await Gmail.findByIdAndUpdate({ _id: id }, { $set: req.body }, { new: true });
     res.status(200).send(account);
   } catch (error) {
     console.log(error);
@@ -42,7 +47,7 @@ export const update = ({ ws }: IEntity) => async (req: Request, res: Response): 
 
 export const get = ({ ws }: IEntity) => async (req: Request, res: Response): Promise<void> => {
   try {
-    const account = await FBAccounts.find();
+    const account = await Gmail.find();
     res.status(200).send(account);
   } catch (error) {
     console.log(error);
@@ -53,7 +58,7 @@ export const get = ({ ws }: IEntity) => async (req: Request, res: Response): Pro
 export const getSingle = ({ ws }: IEntity) => async (req: Request, res: Response): Promise<void> => {
   try {
     const id = req.params.id;
-    const account = await FBAccounts.findById({ _id: id });
+    const account = await Gmail.findById({ _id: id });
     res.status(200).send(account);
   } catch (error) {
     console.log(error);
